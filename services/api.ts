@@ -13,6 +13,10 @@ try {
   console.warn('Environment variables not accessible, using default API URL:', apiUrl);
 }
 
+// Debug: Log the API URL being used
+console.log('🔗 API_URL configured as:', apiUrl);
+console.log('🔍 Environment check:', import.meta.env.VITE_API_URL);
+
 export const API_URL = apiUrl;
 
 export const fetchWithAuth = async (endpoint: string, options: RequestInit = {}) => {
