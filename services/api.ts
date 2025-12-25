@@ -1,23 +1,9 @@
 
 
-// Robust environment variable extraction
-let apiUrl = 'http://localhost:5000/api';
+// Use Vite's environment variable directly
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-try {
-  // Safety check: access import.meta carefully
-  const meta = import.meta as any;
-  if (meta && meta.env && meta.env.VITE_API_URL) {
-    apiUrl = meta.env.VITE_API_URL;
-  }
-} catch (e) {
-  console.warn('Environment variables not accessible, using default API URL:', apiUrl);
-}
-
-// Debug: Log the API URL being used
-console.log('🔗 API_URL configured as:', apiUrl);
-console.log('🔍 Environment check:', import.meta.env.VITE_API_URL);
-
-export const API_URL = apiUrl;
+console.log('🔗 API_URL configured as:', API_URL);
 
 export const fetchWithAuth = async (endpoint: string, options: RequestInit = {}) => {
   const url = `${API_URL}${endpoint}`;
