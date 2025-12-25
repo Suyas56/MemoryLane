@@ -1,0 +1,26 @@
+# Render Blueprint for MemoryLane Backend
+# This file can be used for easy deployment on Render
+# Just connect your repo and Render will auto-detect this file
+
+services:
+  - type: web
+    name: memorylane-api
+    env: node
+    region: oregon  # or your preferred region
+    plan: free
+    branch: main  # or your default branch
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false  # You need to set this manually in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true  # Render will generate a random value
+      - key: GEMINI_API_KEY
+        sync: false  # You need to set this manually in Render dashboard
+      - key: FRONTEND_URL
+        sync: false  # Set this to your Vercel URL after frontend deployment
+    healthCheckPath: /health
